@@ -43,7 +43,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/examples/invoice.html" class="nav-link">
+                            <a href="{{ route('admin.comic') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Comic</p>
                             </a>
@@ -98,8 +98,16 @@
                         </li>
                     </ul>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{ route('admin.logout') }}" class="nav-link">
+                        <i class="nav-icon fas ion-log-out"></i><i class="fa-regular fa-arrow-right-from-bracket"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
             </ul>
+                
         </nav>
         <!-- /.sidebar-menu -->
     </div>

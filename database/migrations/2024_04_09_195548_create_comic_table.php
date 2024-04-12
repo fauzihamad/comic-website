@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('comic', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('type');
+            $table->string('tanggal_rilis');
+            $table->string('Author');
+            $table->string('thumnails');
             $table->timestamps();
         });
     }
