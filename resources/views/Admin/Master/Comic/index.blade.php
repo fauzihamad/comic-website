@@ -41,27 +41,33 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Genre</th>
-                  <th>Type</th>
-                  <th>Tanggal Rilis</th>
-                  <th>Author</th>
-                  <th>Total Chapter</th>
-                  <th>Action</th>
+                  <th class="text-center align-middle" >No</th>
+                  <th class="text-center" >Thumbnail</th>
+                  <th class="text-center" >Name</th>
+                  <th class="text-center" >Genre</th>
+                  <th class="text-center" >Type</th>
+                  <th class="text-center" >Author</th>
+                  <th class="text-center" >Total Chapter</th>
+                  <th class="text-center" >Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
-                  <td>X</td>
-                  <td>X</td>
-                </tr>
+                    @foreach ($comic as $item)
+                    <tr>
+                        @php
+                            $url = $item->thumbnails;
+                        @endphp
+                        <td>{{$loop->iteration}}</td>
+                        <td class="text-center"><img src="{{asset("file/$url")}}" alt="" width="100" height="120"></td>
+                        <td>{{$item->name}}</td>
+                        <td>-</td>
+                        <td>{{$item->type}}</td>
+                        <td>{{$item->author}}</td>
+                        <td>0</td>
+                        <td>-</td>
+                      </tr>
+                    @endforeach
+
               </table>
             </div>
             <!-- /.card-body -->

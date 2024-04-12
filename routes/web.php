@@ -27,6 +27,7 @@ Route::middleware(['auth.session','auth'])->group(function () {
         Route::group(['prefix' => 'comic'], function () {
             Route::get('/', [ComicController::class, 'index'])->name('admin.comic');
             Route::get('/tambah', [ComicController::class, 'tambah'])->name('admin.comic.tambah');
+            Route::post('/simpan', [ComicController::class, 'simpan'])->name('admin.comic.simpan');
 
         });
     });

@@ -32,7 +32,8 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form method="post" action="">
+            <form method="post" action="{{route('admin.comic.simpan')}}" enctype='multipart/form-data'>
+                @csrf
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name Comic</label>
@@ -57,7 +58,7 @@
                         <label for="exampleInputFile">Thumbnail</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                <input type="file" class="custom-file-input" id="exampleInputFile" name="thumbnails">
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
                             <div class="input-group-append">
