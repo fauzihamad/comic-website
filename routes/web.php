@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ComicController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', [PagesController::class, 'index'])->name('user.index');
 
 Route::get('/admin/login', [AuthController::class, 'index'])->name('admin.login')->middleware('guest');
 Route::post('/admin/login', [AuthController::class, 'authenticate'])->name('admin.login.auth');
