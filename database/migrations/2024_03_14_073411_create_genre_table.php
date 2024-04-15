@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comic_chapters', function (Blueprint $table) {
+        Schema::create('genre', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_comic');
             $table->string('name');
-            $table->string('insert_user');
-            $table->string('update_user');
             $table->timestamps();
-            $table->softDeletes();
-
-            $table->foreign('id_comic')->references('id')->on('comic')->onDelete('cascade');
         });
     }
 
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comic_chapters');
+        Schema::dropIfExists('genre');
     }
 };

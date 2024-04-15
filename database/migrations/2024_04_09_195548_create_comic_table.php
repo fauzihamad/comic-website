@@ -15,10 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->string('tanggal_rilis');
+            $table->string('synopsis');
+            $table->integer('released');
             $table->string('Author');
-            $table->string('thumnails');
+            $table->string('posted_by');
+            $table->string('is_complete');
+            $table->string('thumbnails');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

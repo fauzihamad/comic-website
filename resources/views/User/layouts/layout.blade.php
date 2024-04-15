@@ -10,10 +10,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     @yield('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #F5F5F5;
+            font-family: 'Fire Sans', sans-serif;
         }
 
         .checked {
@@ -27,10 +30,10 @@
         @include('User.layouts.partials.header')
     </header>
 
-    <main class="main-content mx-32 flex justify-between items-center">
+    <main class="main-content mx-64 flex justify-between items-center">
         @yield('content')
     </main>
-    
+
     <footer>
         @include('User.layouts.partials.footer')
     </footer>

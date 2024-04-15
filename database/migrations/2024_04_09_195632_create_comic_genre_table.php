@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('comic_genre', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_comic');
+            $table->unsignedBigInteger('id_genre');
+            $table->unsignedBigInteger('insert_user');
+            $table->unsignedBigInteger('update_user');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_comic')->references('id')->on('comic')->onDelete('cascade');
+            $table->foreign('id_genre')->references('id')->on('genre')->onDelete('cascade');
+
         });
     }
 

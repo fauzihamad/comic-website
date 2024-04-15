@@ -6,6 +6,8 @@
 
 @section('content')
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -38,7 +40,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="tabelComic" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th class="text-center align-middle" >No</th>
@@ -64,7 +66,14 @@
                         <td>{{$item->type}}</td>
                         <td>{{$item->author}}</td>
                         <td>0</td>
-                        <td>-</td>
+                        <td class="flex flex-row gap-4">
+                            <a href="{{route('admin.comic.edit', $item->id)}}">
+                                <button>Edit</button>
+                            </a>
+                            <a href="{{route('admin.comic.delete', $item->id)}}">
+                                <button>Delete</button>
+                            </a>
+                        </td>
                       </tr>
                     @endforeach
 
@@ -84,5 +93,14 @@
   </section>
   <!-- /.content -->
 </div>
-@endsection
 
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <script>
+        $('#tabelComic').DataTable();
+    </script>
+
+@endsection
+@endsection

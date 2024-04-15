@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comic_chapters_image', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id_comic');
+            $table->unsignedBigInteger('id_chapters');
+            $table->string('file');
+            $table->string('insert_user');
+            $table->string('update_user');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id_comic')->references('id')->on('comic')->onDelete('cascade');
+            $table->foreign('id_chapters')->references('id')->on('comic_chapters')->onDelete('cascade');
+
         });
     }
 
