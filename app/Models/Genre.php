@@ -16,4 +16,8 @@ class Genre extends Model
      * @var string
      */
     protected $table = 'genre';
+
+    public function comicGenre(){
+        return $this->hasMany(ComicGenre::class, 'id_genre');
+    }
 }

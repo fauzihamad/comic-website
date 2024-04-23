@@ -17,7 +17,7 @@ class ComicController extends Controller
         return view('Admin.Master.Comic.index', $data);
     }
 
-    public function tambah(Request $request){
+    public function tambah(){
         $data['genre'] = Genre::all();
         return view('Admin.Master.Comic.tambah', $data);
     }
@@ -66,12 +66,45 @@ class ComicController extends Controller
     }
 
     public function edit($id){
+        $data['data'] = Comic::with('comicGenre')->find($id);
+        $data['genre'] = Genre::get();
+
+        return view('Admin.Master.Comic.Edit', $data);
+    }
+
+    public function update(Request $request, $id){
+
         $data = Comic::find($id);
-        return view('Admin.Master.Comic.Edit');
+
+        $data->update([
+            'name' => $request->name,
+            'Author' => $request->author,
+            'synopsis' => $request->synopsis,
+            'released' => $request->released,
+            'posted_by' => $request->posted_by,
+            'type' => $request->type
+        ]);
+
+        if($request->has('genre')){
+            ComicGenre::where('id_comic')->delete();
+
+            $genre = $request->genre;
+            foreach ($genre as $key => $value) {
+                ComicGenre::create([
+                    'id_comic' => $id,
+                    'id_genre' => $genre[$key],
+                    'insert_user' => Auth::user()->email,
+                    'update_user' => Auth::user()->email
+                ]);
+            }
+        }
+        return redirect()->route('admin.comic');
     }
 
-    public function update(){
+    public function check(Request $request, $id){
+        $data['data'] = Comic::with('chapters')->find($id);
 
+        // dd($data->name);
+        return view('Admin.Master.Comic.Chapters.index' , $data);
     }
-
 }

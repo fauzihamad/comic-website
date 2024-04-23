@@ -67,6 +67,9 @@
                         <td>{{$item->author}}</td>
                         <td>0</td>
                         <td class="flex flex-row gap-4">
+                            <a href="{{route('admin.comic.check', $item->id)}}">
+                                <button>Check</button>
+                            </a>
                             <a href="{{route('admin.comic.edit', $item->id)}}">
                                 <button>Edit</button>
                             </a>

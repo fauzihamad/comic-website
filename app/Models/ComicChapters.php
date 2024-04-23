@@ -17,4 +17,14 @@ class ComicChapters extends Model
      */
     protected $table = 'comic_chapters';
 
+    protected $guarded = ['id'];
+
+    public function comic(){
+        return $this->belongsTo(Comic::class, 'id_comic');
+    }
+
+    public function comicChaptersImage(){
+        return $this->hasMany(ComicChaptersImage::class, 'id_chapters');
+    }
+
 }

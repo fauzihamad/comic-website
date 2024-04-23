@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comic;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     public function index(){
-        return view('User.index');
+
+        $data['data'] = Comic::with('comicGenre','chapters')->get();
+        // dd($data['data']);
+        return view('User.index', $data);
     }
 
-    public function detail_comic(){
-        return view('User.detail_comic');
+    public function detail_comic($id){
+        $data['data'] = Comic::with('comicGenre','chapters')->find($id);
+
+        return view('User.detail_comic', $data);
     }
 
     public function search_comic(Request $request){

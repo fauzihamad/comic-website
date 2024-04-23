@@ -29,53 +29,65 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Form Tambah Comic</h3>
+                <h3 class="card-title">Form Edit Comic</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form method="post" action="{{route('admin.comic.simpan')}}" enctype='multipart/form-data'>
+            <form method="post" action="{{route('admin.comic.update', $data->id)}}" enctype='multipart/form-data'>
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name Comic</label>
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name Comic">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name Comic" value="{{$data->name}}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Author</label>
-                        <input name="author" type="text" class="form-control" id="name" placeholder="Author">
+                        <input name="author" type="text" class="form-control" id="name" placeholder="Author" value="{{$data->Author}}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Synopsis Comic</label>
-                        <textarea name="synopsis" type="text" class="form-control" id="name" placeholder="Synopsis.."></textarea>
+                        <textarea name="synopsis" type="text" class="form-control" id="name" placeholder="Synopsis.." required>{{$data->synopsis}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Released</label>
-                        <input name="released" type="number" class="form-control" id="name" placeholder="Released">
+                        <input name="released" type="number" class="form-control" id="name" placeholder="Released" value="{{$data->released}}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Posted By</label>
-                        <input name="posted_by" type="text" class="form-control" id="name" placeholder="Released" value="Comic Website">
+                        <input name="posted_by" type="text" class="form-control" id="name" placeholder="Released" value="{{$data->posted_by}}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Type Comic </label>
-                        <select name="type" class="custom-select rounded-0" id="exampleSelectRounded0">
-                            <option>Manhwa</option>
-                            <option>Manhua</option>
-                            <option>Manga</option>
+                        <select name="type" class="custom-select rounded-0" id="exampleSelectRounded0" required>
+                            <option {{$data->type == "Manhwa" ? "checked" : ""}}>Manhwa</option>
+                            <option {{$data->type == "Manhua" ? "checked" : ""}}>Manhua</option>
+                            <option {{$data->type == "Manga" ? "checked" : ""}}>Manga</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Comic Genre </label>
-                        <select name="genre[]" id="comicGenre" class="custom-select rounded-0" id="exampleSelectRounded0" multiple>
+                        <select name="genre[]" id="comicGenre" class="custom-select rounded-0" id="exampleSelectRounded0" multiple required>
                             @foreach ($genre as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
+                            @php
+                                $checked = ""; // Reset $checked for each iteration
+                            @endphp
+                            @foreach ($data->comicGenre as $cg)
+                                @if ($cg->id_genre == $item->id)
+                                    @php
+                                        $checked = "selected"; // Use "selected" instead of "checked" for <option> tags
+                                        break;
+                                    @endphp
+                                @endif
                             @endforeach
+                            <option value="{{$item->id}}" {{$checked}}>{{$item->name}}</option>
+                        @endforeach
                         </select>
                     </div>
 
@@ -86,10 +98,11 @@
                                 <input type="file" class="custom-file-input" id="exampleInputFile" name="thumbnails">
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
-                            </div>
                         </div>
+                        @php
+                            $fileName = $data->thumbnails;
+                        @endphp
+                        <p>Current Thumnails : <a href="{{asset("file/$data->thumbnails")}}" target="_blank">Link</a></p>
                     </div>
 
                 </div>

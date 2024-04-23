@@ -24,4 +24,12 @@ class ComicGenre extends Model
         'update_user',
     ];
 
+    public function comic(){
+        return $this->belongsTo(Comic::class, 'id_comic');
+    }
+
+    public function genre(){
+        return $this->belongsTo(Genre::class, 'id_genre');
+    }
+
 }

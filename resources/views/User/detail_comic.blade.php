@@ -8,12 +8,12 @@
     <div class="flex gap-6 mt-6">
         <div class="w-2/3 flex flex-col gap-6">
             <div class="flex flex-row bg-white shadow-md">
-                <p class="w-full p-2 font-medium text-[14px]">Comic Website > Return Mount Hua Sect</p>
+                <p class="w-full p-2 font-medium text-[14px]">Comic Website > {{$data->name}}</p>
             </div>
 
             <div class="flex flex-row bg-white p-4 gap-4">
                 <div class="w-1/5 flex flex-col gap-2 items-center">
-                    <img src="{{asset('img/cover.jpg')}}" alt="" class="rounded-md">
+                    <img src="{{asset("file/$data->thumbnails")}}" alt="" class="rounded-md">
                     <button class="w-full bg-purple-800 text-white rounded-md px-4 py-2">
                         Bookmark
                     </button>
@@ -30,25 +30,25 @@
                     </div>
                     <div class="w-full flex flex-row justify-between items-center bg-gray-200 rounded-md p-2">
                         <p class="text-xs text-[#333] font-light">Status</p>
-                        <p class="text-xs text-[#333] font-light">Ongoing</p>
+                        <p class="text-xs text-[#333] font-light">{{$data->is_complete == "Y" ? "Complete" : "Ongoing"}}</p>
                     </div>
                     <div class="w-full flex flex-row justify-between items-center bg-gray-200 rounded-md p-2">
                         <p class="text-xs text-[#333] font-light">Type</p>
-                        <p class="text-xs text-[#333] font-light">Manhwa</p>
+                        <p class="text-xs text-[#333] font-light">{{$data->type}}</p>
                     </div>
                 </div>
                 <div class="w-4/5 flex flex-col gap-2">
-                    <p class="w-full font-semibold text-[21px]">Return of Mount Hua Sect</p>
-                    <p class="w-full font-semibold text-[14px]">Synopsis The Player Hides His Past</p>
-                    <p class="text-md text-[#333] font-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem velit quia voluptatibus ullam. Vitae inventore quas quod, distinctio accusamus facilis hic, dignissimos ut, possimus qui dolorum expedita impedit? Nulla esse molestias aspernatur dolor hic blanditiis voluptate ipsam ipsum maxime similique sit, libero eum fugiat minima commodi? Aperiam, iure corporis esse, eaque sapiente sunt placeat ut accusamus iste quis maiores! Tempore veniam nam officia itaque distinctio voluptatem, odio ab obcaecati voluptates modi, voluptas amet dolore nihil minima nemo illo rem accusamus mollitia, aliquam nobis nesciunt reiciendis! Quibusdam odit placeat assumenda quasi dignissimos blanditiis fuga in alias. Sit accusantium accusamus enim sed.</p>
+                    <p class="w-full font-semibold text-[21px]">{{$data->name}}</p>
+                    <p class="w-full font-semibold text-[14px]">Synopsis {{$data->name}}</p>
+                    <p class="text-md text-[#333] font-light">{{$data->synopsis}}</p>
                     <div class="grid grid-cols-2 justify-start gap-4">
                         <div>
                             <p class="w-full font-semibold text-[14px]">Released</p>
-                            <p class="w-full font-medium text-[14px]">-</p>
+                            <p class="w-full font-medium text-[14px]">{{$data->released}}</p>
                         </div>
                         <div>
                             <p class="w-full font-semibold text-[14px]">Author</p>
-                            <p class="w-full font-medium text-[14px]">Bethes</p>
+                            <p class="w-full font-medium text-[14px]">{{$data->Author}}</p>
                         </div>
                         <div>
                             <p class="w-full font-semibold text-[14px]">Released</p>
@@ -64,22 +64,22 @@
                         </div>
                         <div>
                             <p class="w-full font-semibold text-[14px]">Posted By</p>
-                            <p class="w-full font-medium text-[14px]">-</p>
+                            <p class="w-full font-medium text-[14px]">{{$data->posted_by}}</p>
                         </div>
                         <div>
                             <p class="w-full font-semibold text-[14px]">Posted On</p>
-                            <p class="w-full font-medium text-[14px]">-</p>
+                            <p class="w-full font-medium text-[14px]">{{$data->created_at}}</p>
                         </div>
                         <div>
                             <p class="w-full font-semibold text-[14px]">Updated On</p>
-                            <p class="w-full font-medium text-[14px]">-</p>
+                            <p class="w-full font-medium text-[14px]">{{$data->updated_at}}</p>
                         </div>
                         <div>
                             <p class="w-full font-semibold text-[14px]">Genre</p>
                             <div class="flex flex-row gap-2">
-                                <button class="px-4 py-1 bg-white-100 text-purple-900 font-medium rounded-md" style="border: 1px solid purple">Action</button>
-                                <button class="px-4 py-1 bg-white-100 text-purple-900 font-medium rounded-md" style="border: 1px solid purple">Action</button>
-                                <button class="px-4 py-1 bg-white-100 text-purple-900 font-medium rounded-md" style="border: 1px solid purple">Action</button>
+                            @foreach ($data->comicGenre as $item)
+                                <button class="px-4 py-1 bg-white-100 text-purple-900 font-medium rounded-md text-nowrap" style="border: 1px solid purple">{{$item->genre->name}}</button>
+                            @endforeach
                             </div>
                         </div>
                     </div>

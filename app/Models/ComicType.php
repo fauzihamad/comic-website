@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ComicType extends Model
 {
     use HasFactory;
+
+    protected $table = 'comic_type';
+
 }
