@@ -5,6 +5,7 @@
 /public/dist
 /public/plugins
 /public/storage
+/public/file
 /storage/*.key
 /vendor
 .env

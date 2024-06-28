@@ -35,7 +35,10 @@
             <div class="card-header d-flex align-items-center justify-content-between" style="width: 100%;">
                 <h3 class="card-title">List Comic</h3>
                 <a href="{{ route('admin.comic.tambah') }}">
-                <button class="btn btn-primary">Add Comic</button>
+                    <div class="d-flex justify-content-end" style="flex-grow: 1">
+                        <button class="btn btn-primary" >Add Comic</button>
+
+                    </div>
                 </a>
             </div>
             <!-- /.card-header -->
@@ -62,39 +65,37 @@
                         <td>{{$loop->iteration}}</td>
                         <td class="text-center"><img src="{{asset("file/$url")}}" alt="" width="100" height="120"></td>
                         <td>{{$item->name}}</td>
-                        <td>-</td>
+                        <td>@foreach ($item->comicGenre as $item2)
+                            <button class="btn btn-primary">{{$item2->genre->name}}</button>
+                        @endforeach</td>
                         <td>{{$item->type}}</td>
                         <td>{{$item->author}}</td>
-                        <td>0</td>
+                        <td>{{count($item->chapters)}} Chapters</td>
                         <td class="flex flex-row gap-4">
-                            <a href="{{route('admin.comic.check', $item->id)}}">
-                                <button>Check</button>
+                            <a href="{{ route('admin.comic.check', $item->id) }}">
+                                <button class="btn btn-success"><i class="fa fa-cog" aria-hidden="true"></i></button>
                             </a>
-                            <a href="{{route('admin.comic.edit', $item->id)}}">
-                                <button>Edit</button>
+                            <a href="{{ route('admin.comic.edit', $item->id) }}">
+                                <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             </a>
-                            <a href="{{route('admin.comic.delete', $item->id)}}">
-                                <button>Delete</button>
-                            </a>
+                            <div class="flex">
+                                <form method="POST" action="{{ route('admin.comic.delete', $item->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
                         </td>
                       </tr>
                     @endforeach
 
               </table>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
-
-          <!-- /.card -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
   </section>
-  <!-- /.content -->
 </div>
 
 @section('js')
@@ -104,6 +105,16 @@
     <script>
         $('#tabelComic').DataTable();
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if ($message = Session::get('failed'))
+        <script>Swal.fire("{{ $message }}")</script>
+    @endif
+
+    @if ($message = Session::get('success'))
+        <script>Swal.fire("{{ $message }}")</script>
+    @endif
 
 @endsection
 @endsection

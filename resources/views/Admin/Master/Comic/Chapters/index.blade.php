@@ -48,6 +48,7 @@
                   <th class="text-center align-middle" >No</th>
                   <th class="text-center" >Nama Comic</th>
                   <th class="text-center" >Judul Chapters</th>
+                  <th class="text-center" >Total Image</th>
                   <th class="text-center" >Action</th>
                 </tr>
                 </thead>
@@ -57,15 +58,16 @@
                             <td class="text-center align-middle">{{$loop->iteration}}</td>
                             <td class="text-center">{{$data->name}}</td>
                             <td class="text-center">{{$item->name}}</td>
+                            <td class="text-center">{{count($item->comicChaptersImage)}} Gambar</td>
                             <td class="flex flex-row gap-4">
                                 <a href="{{route('admin.comic.chapters.check', $item->id)}}">
-                                    <button>Check</button>
+                                    <button class="btn btn-success"><i class="fa fa-cog" aria-hidden="true"></i></button>
                                 </a>
                                 <a href="{{route('admin.comic.chapters.edit', $item->id)}}">
-                                    <button>Edit</button>
+                                    <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                 </a>
                                 <a href="{{route('admin.comic.chapters.delete', $item->id)}}">
-                                    <button>Delete</button>
+                                    <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </a>
                             </td>
                         </tr>

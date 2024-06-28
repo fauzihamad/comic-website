@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class ComicController extends Controller
 {
     public function index(){
-        $data['comic'] = Comic::all();
+        $data['comic'] = Comic::with(['chapters','comicGenre'])->get();
 
         return view('Admin.Master.Comic.index', $data);
     }
@@ -103,8 +103,19 @@ class ComicController extends Controller
 
     public function check(Request $request, $id){
         $data['data'] = Comic::with('chapters')->find($id);
-
-        // dd($data->name);
         return view('Admin.Master.Comic.Chapters.index' , $data);
     }
+
+    public function delete($id){
+        $var = Comic::find($id);
+        $var->delete();
+
+        if($var){
+            return redirect()->route('admin.comic')->with('success','Data Berhasil Dihapus');
+        }else{
+            return redirect()->route('admin.comic')->with('failed','Data Gagal Dihapus');
+
+        }
+    }
+
 }
