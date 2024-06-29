@@ -100,18 +100,14 @@
                     border-color: #ddd;
                     color: #555;padding: 7px 10px;border: 1px solid #ececec">
                     <div class="flex flex-col gap-4">
-                        <div class="flex flex-col gap-2 bg-[#ececec] rounded-md p-2">
-                            <p class="text-[#333] text-sm">Chapter 50</p>
-                            <p class="text-[#888] text-xs">April 11, 2024</p>
-                        </div>
-                        <div class="flex flex-col gap-2 bg-[#ececec] rounded-md p-2">
-                            <p class="text-[#333] text-sm">Chapter 50</p>
-                            <p class="text-[#888] text-xs">April 11, 2024</p>
-                        </div>
-                        <div class="flex flex-col gap-2 bg-[#ececec] rounded-md p-2">
-                            <p class="text-[#333] text-sm">Chapter 50</p>
-                            <p class="text-[#888] text-xs">April 11, 2024</p>
-                        </div>
+                        @foreach ($data->chapters as $item)
+                        <a href="{{route('user.detail-chapters', ["idComic" => $data->id,"id"=>$item->id])}}">
+                            <div class="flex flex-col gap-2 bg-[#ececec] rounded-md p-2">
+                                <p class="text-[#333] text-sm">{{$item->name}}</p>
+                                <p class="text-[#888] text-xs">{{$item->created_at}}</p>
+                            </div>
+                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>

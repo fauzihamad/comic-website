@@ -57,5 +57,36 @@ class ComicChaptersController extends Controller
                 'update_user' => Auth::user()->email
             ]);
         }
+
+        return redirect()->route('admin.comic.chapters.check', $id);
+    }
+
+    public function delete($id){
+        $var = ComicChapters::find($id);
+        $idComic = $var->id_comic;
+        $var->delete();
+
+        if($var){
+            return redirect()->route('admin.comic.check',$idComic)->with('success','Data Berhasil Dihapus');
+        }else{
+            return redirect()->route('admin.comic.check',$idComic)->with('failed','Data Gagal Dihapus');
+
+        }
+    }
+
+    public function update(Request $request,$id){
+        $var = ComicChapters::find($id);
+        $idComic = $var->id_comic;
+
+        $var->update([
+            'name' => $request->name,
+        ]);
+
+        if($var){
+            return redirect()->route('admin.comic.check',$idComic)->with('success','Data Berhasil Diubah');
+        }else{
+            return redirect()->route('admin.comic.check',$idComic)->with('failed','Data Gagal Diubah');
+
+        }
     }
 }

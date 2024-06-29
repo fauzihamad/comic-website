@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_comic');
             $table->string('name');
+            $table->integer('views')->default(0);
+            $table->enum('is_active', ['Y', 'N'])->default('N');
             $table->string('insert_user');
             $table->string('update_user');
             $table->timestamps();

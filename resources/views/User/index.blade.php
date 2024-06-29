@@ -35,24 +35,24 @@
                 <p class="w-full p-2 font-semibold text-[15px]">Latest Project</p>
                 <hr>
                 <div class="grid grid-cols-2 p-4 gap-6">
-                    <div class="flex flex-row gap-2">
-                        <img src="{{ asset('img/cover.jpg') }}" alt="" class="w-1/4 h-fit">
-                        <div class="w-full flex flex-col gap-2">
-                            <p class="text-[13.3px] font-semibold text-[#333]">Return Mount Hua Sect</p>
-                            <div class="flex justify-between">
-                                <p class="text-[13px] font-medium text-[#333]">Chapter 119</p>
-                                <p class="text-[13px] font-medium text-[#999]">8 Hour Ago</p>
-                            </div>
-                            <div class="flex justify-between">
-                                <p class="text-[13px] font-medium text-[#333]">Chapter 119</p>
-                                <p class="text-[13px] font-medium text-[#999]">8 Hour Ago</p>
-                            </div>
-                            <div class="flex justify-between">
-                                <p class="text-[13px] font-medium text-[#333]">Chapter 119</p>
-                                <p class="text-[13px] font-medium text-[#999]">8 Hour Ago</p>
+                    @foreach ($latestComic as $item)
+                        <div class="flex flex-row gap-2">
+                            <img src="{{ asset("file/$item->thumbnails") }}" alt="" class="w-1/4 h-fit">
+                            <div class="w-full flex flex-col gap-2">
+                                <p class="text-[13.3px] font-semibold text-[#333]">{{$item->name}}</p>
+                                @foreach ($item->chapters as $ch)
+                                    @if ($loop->iteration != 4)
+                                        <div class="flex justify-between">
+                                            <p class="text-[13px] font-medium text-[#333]">{{$ch->name}}</p>
+                                            <p class="text-[13px] font-medium text-[#999]">{{$ch->created_at}}</p>
+                                        </div>
+                                    @else
+                                        @break
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 

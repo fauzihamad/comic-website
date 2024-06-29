@@ -14,18 +14,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!Role::where('name', 'admin')->exists()) {
-            Role::create(['name' => 'admin']);
+        if (!Role::where('name', 'super admin')->exists()) {
+            Role::create(['name' => 'super admin']);
         }
-        
+
         $user = User::create([
-            'name' => 'admin',
+            'name' => 'super admin',
             'email' => 'admin@example.com', // Change this to the desired email
             'password' => bcrypt('123456'), // Change 'password' to the desired password
         ]);
 
-        // Assign the 'admin' role to the user
-        $role = Role::findByName('admin');
+        // Assign the 'super admin' role to the user
+        $role = Role::findByName('super admin');
         $user->assignRole($role);
     }
 }

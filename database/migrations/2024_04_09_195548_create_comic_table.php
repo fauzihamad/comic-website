@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('Author');
             $table->string('posted_by');
             $table->string('is_complete');
+            $table->string('is_project');
+            $table->enum('is_active', ['Y', 'N'])->default('N');
             $table->string('thumbnails');
             $table->timestamps();
             $table->softDeletes();
