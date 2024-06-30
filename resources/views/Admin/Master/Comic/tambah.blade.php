@@ -71,6 +71,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="exampleSelectRounded0">is project?</label>
+                        <select name="is_project" class="custom-select rounded-0" id="exampleSelectRounded0">
+                            <option>Project</option>
+                            <option>Mirror</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="exampleSelectRounded0">Comic Genre </label>
                         <select name="genre[]" id="comicGenre" class="custom-select rounded-0" id="exampleSelectRounded0" multiple>
                             @foreach ($genre as $item)

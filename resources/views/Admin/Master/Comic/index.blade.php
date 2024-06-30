@@ -34,12 +34,11 @@
           <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between" style="width: 100%;">
                 <h3 class="card-title">List Comic</h3>
-                <a href="{{ route('admin.comic.tambah') }}">
-                    <div class="d-flex justify-content-end" style="flex-grow: 1">
+                <div class="d-flex justify-content-end" style="flex-grow: 1">
+                      <a href="{{ route('admin.comic.tambah') }}">
                         <button class="btn btn-primary" >Add Comic</button>
-
+                      </a>
                     </div>
-                </a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -78,6 +77,7 @@
                             <a href="{{ route('admin.comic.edit', $item->id) }}">
                                 <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             </a>
+                            @role('super admin')
                             <div class="flex">
                                 <form method="POST" action="{{ route('admin.comic.delete', $item->id) }}">
                                     @csrf
@@ -85,6 +85,7 @@
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </form>
                             </div>
+                            @endrole
                         </td>
                       </tr>
                     @endforeach

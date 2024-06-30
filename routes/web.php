@@ -68,7 +68,7 @@ Route::middleware(['auth.session','auth'])->group(function () {
 
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.users');
-            Route::put('/simpan', [UserController::class, 'simpan'])->name('admin.users.simpan');
+            Route::post('/simpan', [UserController::class, 'simpan'])->name('admin.users.simpan');
             Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
             Route::get('/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
         });

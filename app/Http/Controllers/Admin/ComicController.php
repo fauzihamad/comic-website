@@ -45,6 +45,7 @@ class ComicController extends Controller
             $comic->released = $request->released;
             $comic->posted_by = $request->posted_by;
             $comic->is_complete = 'N';
+            $comic->is_project = $request->is_project;
             $comic->thumbnails = $nama_file;
 
             $comic->save();

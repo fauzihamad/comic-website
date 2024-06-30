@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     public function index(){
-        $data['user'] = User::where('email','!=',Auth::user()->email);
+        $data['user'] = User::where('email','!=',Auth::user()->email)->get();
         $data['role'] = Role::all();
         return view('Admin.Master.User.index', $data);
     }
@@ -38,11 +38,14 @@ class UserController extends Controller
         if($validated){
             $user = new User();
             $user->name = $request->name;
-
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $role = Role::findByName($request->role);
+            $user->assignRole($role);
             $user->save();
 
             if($user){
-                return redirect()->route('admin.comic');
+                return redirect()->route('admin.users');
             }
         }
     }

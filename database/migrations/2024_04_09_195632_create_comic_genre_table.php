@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_comic');
             $table->unsignedBigInteger('id_genre');
-            $table->unsignedBigInteger('insert_user');
-            $table->unsignedBigInteger('update_user');
+            $table->string('insert_user');
+            $table->string('update_user');
             $table->timestamps();
             $table->softDeletes();
 
