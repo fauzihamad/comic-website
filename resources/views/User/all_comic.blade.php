@@ -5,35 +5,43 @@
 @section('title', 'Comic Website')
 
 @section('content')
-    <div class="flex gap-6 mt-6">
-        <div class="w-2/3 flex flex-col gap-6">
+    <div class="flex flex-col lg:flex-row gap-6 mt-6 lg:mx-64">
+        <div class="w-full lg:w-2/3 flex flex-col gap-6">
 
             <div class="flex flex-col bg-white">
                 <p class="w-full p-2 font-semibold text-[15px]">Manga Lists</p>
                 <hr>
-                <div class="grid grid-cols-6 bg-white p-4 gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-5 bg-white p-4 gap-4">
+                    @foreach ($latestComic as $item)
+
                     <div class="flex flex-col gap-2">
                         <a href="#" class="cursor-pointer">
-                            <img src="{{ asset('img/cover.jpg') }}" alt="" class="rounded-lg">
-                            <p class="text-[13.3px] font-semibold text-[#333]">Return Mount Hua Sect</p>
-                            <p class="text-[13px] font-medium text-[#999]">Chapter 119</p>
-                            <div class="flex items-center">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <p class="ml-2 text-[13px] font-medium text-[#333]">3/5</p>
-                            </div>
+                            <a href="{{route('user.detail-comic', $item->id)}}">
+                                <img src="{{ asset("file/$item->thumbnails") }}" alt="" class="rounded-lg">
+                            </a>
+                            @if (isset($item->chapters) && count($item->chapters) > 0)
+                                <a href="{{route('user.detail-chapters', ["idComic" => $item->id,"id"=>$item->chapters[0]->id])}}">
+                                    <p class="text-[13.3px] font-semibold text-[#333]">{{$item->name}}</p>
+                                </a>
+                                <p class="text-[13px] font-medium text-[#999]">{{$item->chapters[0]->name}}</p>
+                                <div class="flex items-center">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <p class="ml-2 text-[13px] font-medium text-[#333]">3/5</p>
+                                </div>
+                            @endif
                         </a>
                     </div>
-
+                    @endforeach
                 </div>
             </div>
 
 
         </div>
-        <div class="w-1/3">
+        <div class="w-full lg:w-1/3">
             <div class="flex flex-col bg-white">
                 <p class="w-full p-2 font-semibold text-[15px]">Popular</p>
                 <hr>

@@ -5,7 +5,7 @@
 @section('title', 'Comic Website')
 
 @section('content')
-<div class="flex flex-col items-center w-full mt-8">
+<div class="flex flex-col items-center w-full mt-8 lg:mx-64">
 
     <h1 class="font-bold text-[21px]">{{$data->comic->name}}</h1>
     <p>All Chapters are in <a href="{{route('user.detail-comic',$data->comic->id)}}">{{$data->comic->name}}</a></p>
@@ -14,9 +14,9 @@
     </p>
 
     <div class="flex w-full justify-between mt-4">
-        <select name="" id="">
+        <select name="chapters" id="chapters">
             @foreach ($data->comic->chapters as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
+                <option value="{{$item->id}}" {{$id == $item->id ? "selected" : ""}}>{{$item->name}}</option>
             @endforeach
         </select>
 
@@ -34,15 +34,20 @@
             @endif
         </div>
     </div>
-    
-    <div class="mt-6 w-full">
+
+    <div class="mt-6 w-full flex flex-col justify-center items-center">
         @foreach ($data->comicChaptersImage as $item)
-            <img src="{{asset("file/$item->file")}}" alt="" class="w-full">
+            <img src="{{asset("file/$item->file")}}" alt="" class="w-fit">
         @endforeach
     </div>
 </div>
 
 <script>
 
+    let idComic = "{{$idComic}}";
+    console.log(idComic);
+    $('#chapters').change(function() {
+        window.location.href = `http://localhost:8000/${idComic}/detail-chapters/${$("#chapters").val()}`;
+    });
 </script>
 @endsection

@@ -73,8 +73,8 @@
                     <div class="form-group">
                         <label for="exampleSelectRounded0">is project?</label>
                         <select name="is_project" class="custom-select rounded-0" id="exampleSelectRounded0">
-                            <option>Project</option>
-                            <option>Mirror</option>
+                            <option value="Y">Project</option>
+                            <option value="N">Mirror</option>
                         </select>
                     </div>
 
